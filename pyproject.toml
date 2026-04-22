@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sigla-sdk"
+version = "0.1.0"
+description = "SDK compartilhado para microsserviços SIGLA (HTTP client, logging e middlewares)."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { file = "LICENSE" }
+authors = [{ name = "SME SIGLA" }]
+dependencies = [
+  "requests>=2.31",
+  "python-json-logger>=2.0",
+]
+
+[project.optional-dependencies]
+django = [
+  "Django>=5.2",
+  "djangorestframework-simplejwt>=5.5.1",
+  "django-auditlog>=3.2.1",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
