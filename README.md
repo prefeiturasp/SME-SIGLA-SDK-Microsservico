@@ -19,5 +19,5 @@ from sigla_sdk.logging.json_formatter import CustomJsonFormatter
 - **Middlewares Django**:
 
 ```python
-from sigla_sdk.django.middlewares import CorrelationIdMiddleware, AuditlogJWTMiddleware
+from sigla_sdk.middlewares import CorrelationIdMiddleware, AuditlogJWTMiddleware
 ```
