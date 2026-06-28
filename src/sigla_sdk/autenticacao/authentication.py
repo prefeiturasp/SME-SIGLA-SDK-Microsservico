@@ -39,13 +39,13 @@ class ApiKeyAuthentication(authentication.BaseAuthentication):
         """
         chave_esperada = settings.API_KEY
         if not chave_esperada:
-            raise exceptions.AuthenticationFailed("API key nao configurada")
+            raise exceptions.AuthenticationFailed("API key não configurada")
 
         chave_recebida = request.headers.get(self.keyword)
         if not chave_recebida:
-            return None
+            raise exceptions.AuthenticationFailed("API key não informada no cabeçalho da requisição")
 
         if not secrets.compare_digest(chave_recebida, chave_esperada):
-            raise exceptions.AuthenticationFailed("API key invalida")
+            raise exceptions.AuthenticationFailed("API key inválida ou não autorizada")
 
         return (UsuarioApiKey(), None)
