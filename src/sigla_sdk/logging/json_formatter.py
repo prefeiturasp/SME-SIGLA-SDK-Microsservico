@@ -1,10 +1,10 @@
-from pythonjsonlogger import jsonlogger
+from pythonjsonlogger.json import JsonFormatter
 
 from sigla_sdk.context import get_correlation_id
 import elasticapm
 
 
-class CustomJsonFormatter(jsonlogger.JsonFormatter):
+class CustomJsonFormatter(JsonFormatter):
     def add_fields(self, log_record, record, message_dict):
         super().add_fields(log_record, record, message_dict)
 

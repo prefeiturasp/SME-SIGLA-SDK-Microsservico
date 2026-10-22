@@ -45,16 +45,15 @@ class CorrelationIdMiddleware:
         response = self.get_response(request)
 
         if getattr(request, "method", None) != "OPTIONS":
-            duration_ms = (time.perf_counter() - start_time) * 1000
-            extra_data = {
-                "method": getattr(request, "method", None),
-                "path": getattr(request, "path", None),
-                "status_code": getattr(response, "status_code", None),
-                "duration_ms": round(duration_ms, 2),
-                "payload": payload,
-                "user": str(getattr(request, "user", "Anonymous")),
-            }
-            logger.info(f"{extra_data['method']} {extra_data['path']}", extra=extra_data)
+            method = getattr(request, "method", None)
+            path = getattr(request, "path", None)
+            status_code = getattr(response, "status_code", None)
+            duration_ms = round((time.perf_counter() - start_time) * 1000, 2)
+            user = str(getattr(request, "user", "Anonymous"))
+            logger.info(
+                f"{method} {path} | status_code={status_code} | "
+                f"duration_ms={duration_ms} | payload={payload} | user={user}"
+            )
 
         try:
             response["X-Correlation-ID"] = cid
